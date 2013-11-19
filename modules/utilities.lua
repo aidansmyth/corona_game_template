@@ -1,37 +1,65 @@
 --[[----------------------------------------------------------------------------
-	Utilities Module
 
-	File: globalData.lua
-	
-	Description: 
-	Collection of common useful functions
+MODULE NAME: utilities.lua
 
-	Date: 
+DESCRIPTION:
+Collection of common useful functions
 
-	Authors: Aidan Smyth
+DATE: 
 
-	Notes: 
-	Corona SDK version used: 2012.971
-	
-	
+AUTHOR: Aidan Smyth  smyth.aidan@gmail.com
+
+
+MODULE NOTES: 
+Corona SDK version used: 2012.971
+
+
+
+
 ------------------------------------------------------------------------------]]
 
--- 
+--------------------------------------------------------------------------------
+-- SETUP MODULE
+--------------------------------------------------------------------------------
+
+-- LOAD MODULES
+----------------------------------------
 local GD = require("globals")					-- Load Global data
 
 
--- 
+-- CONSTRUCTOR
+----------------------------------------
 local UTIL = {}
 -- print("utilities module loaded")
 
 
+--------------------------------------------------------------------------------
+-- VARIABLES
+--------------------------------------------------------------------------------
+
+-- LOCAL VARIABES
+----------------------------------------
+
+
+
 -- GLOBAL VARIABLES
+----------------------------------------
+
+
+
+--------------------------------------------------------------------------------
+-- PRIVATE FUNCTIONS
 --------------------------------------------------------------------------------
 
 
 
--- GLOBAL FUNCTION TO PRINT TABLE
 --------------------------------------------------------------------------------
+-- PUBLIC FUNCTIONS
+--------------------------------------------------------------------------------
+
+-- TABLE FUNCTIONS
+----------------------------------------
+
 -- Print contents of a table
 UTIL.tprint = function(tbl, indent)
 	--print("Printing contents of table")
@@ -47,8 +75,7 @@ UTIL.tprint = function(tbl, indent)
 	end
 end
 
--- GLOBAL FUNCTION TO DEEP COPY A TABLE
---------------------------------------------------------------------------------
+-- Completely copy a table
 UTIL.deepcopy = function(orig)
     local orig_type = type(orig)
     local copy
@@ -64,8 +91,12 @@ UTIL.deepcopy = function(orig)
     return copy
 end
 
---
---------------------------------------------------------------------------------
+
+
+-- CONSOLE OUTPUT
+----------------------------------------
+
+-- Print debug messages to the console
 UTIL.dbprint = function(message)
 	-- print("dbprint called")
 	local msg = message
@@ -75,7 +106,11 @@ UTIL.dbprint = function(message)
 end
 
 
--- Memory Management functions ---------
+
+
+-- MEMORY MANAGEMENT
+----------------------------------------
+
 -- Clear timers
 UTIL.cancelAllTimers = function( timerStash )
     local k, v
@@ -103,5 +138,7 @@ UTIL.cancelAllTransitions = function( transitionStash )
 end
 
 
--- 
+--------------------------------------------------------------------------------
+-- EXPORT DATA AND FUNCTIONS
+-------------------------------------------------------------------------------- 
 return UTIL
