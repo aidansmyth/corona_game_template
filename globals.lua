@@ -7,7 +7,7 @@ DATE:
 AUTHOR: 
 
 
-SCENE NOTES: 
+MODULE NOTES: 
 
 
 
@@ -54,7 +54,8 @@ GD.screenCenterX = display.contentWidth/2       			-- Horizontal Center
 GD.screenCenterY = display.contentHeight/2      			-- Vertical Center
 
 -- DEBUG VARIABLES
-GD.debugging = false
+GD.debugging = false					-- Turn on/off dubugging
+GD.memtest = true 						-- Turn on/off memory test info
 
 
 --------------------------------------------------------------------------------

@@ -1,0 +1,66 @@
+--[[----------------------------------------------------------------------------
+APP: corona_game_template
+
+NAME: build.settings
+
+DATE: 
+
+AUTHOR: 
+
+
+NOTES: 
+
+
+
+
+------------------------------------------------------------------------------]]
+
+-- Supported values for orientation:
+-- portrait, portraitUpsideDown, landscapeLeft, landscapeRight
+
+settings = {
+	
+	orientation = {
+		default = "portrait",
+		content = { "portrait", "portraitUpsideDown"},
+		supported = { "portrait", "portraitUpsideDown"}
+	},
+	
+	iphone = {
+		plist = {
+			UIStatusBarHidden = false,
+			UIPrerenderedIcon = true, -- set to false for "shine" overlay
+            -- Add custom fonts
+            UIAppFonts = {
+				"gillsansinfantstd.ttf",
+				"gillsansinfantstdbold.ttf",
+				},
+            -- Custom icon files
+            -- CFBundleIconFiles = { },
+			-- UIApplicationExitsOnSuspend = true, -- uncomment to quit app on suspend
+
+            --[[
+            -- iOS app URL schemes:
+            CFBundleURLTypes =
+            {
+                {
+                    CFBundleURLSchemes =
+                    {
+                        "fbXXXXXXXXXXXXXX", -- example scheme for facebook
+                        "coronasdkapp", -- example second scheme
+                    }
+                }
+            }
+            --]]
+		}
+	},
+	
+	--[[
+	-- Android permissions
+
+	androidPermissions = {
+  		"android.permission.INTERNET",
+  	},
+
+	]]--
+}

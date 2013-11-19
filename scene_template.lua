@@ -1,6 +1,6 @@
 --[[----------------------------------------------------------------------------
 
-SCENE NAME: scene.lua
+SCENE NAME: scene_template.lua
 
 DATE: 
 
