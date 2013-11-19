@@ -57,11 +57,11 @@ storyboard.gotoScene( "scene_splash", "fade", 200 )		-- Go to splash screen
 -- print("OS is: " .. device.OS)
 -- print("Simulator: " .. tostring(device.isSimulator))
 
--- if GD.debugging == true then
+if GD.debugging == true then
 
--- 	-- Show debug menu
--- 	DEBUG.displayDebug()
+	-- Show debug menu
+	debug.displayDebug()
 
--- 	-- Add runtime listener to display/update memory display
--- 	Runtime:addEventListener( "enterFrame", debug.monitorMem ) -- Runtime Listerner to run monitorMem function
--- end
+	-- Add runtime listener to display/update memory display
+	-- Runtime:addEventListener( "enterFrame", debug.monitorMem ) -- Runtime Listerner to run monitorMem function
+end

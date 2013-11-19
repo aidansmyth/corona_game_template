@@ -18,6 +18,8 @@ SCENE NOTES:
 -- SETUP MODULE
 --------------------------------------------------------------------------------
 
+print("debug module loaded")
+
 -- LOAD MODULES
 ----------------------------------------
 local GD = require("globals")								-- Load global data module
@@ -25,7 +27,7 @@ local GD = require("globals")								-- Load global data module
 -- CONSTRUCTOR
 ----------------------------------------
 -- print("debug module loaded")
-local DEBUG = {}
+local debug = {}
 
 
 --------------------------------------------------------------------------------
@@ -39,7 +41,7 @@ local x = 1
 
 -- GLOBAL VARIABLES
 ----------------------------------------
-DEBUG.example = x 											-- Device orientation
+debug.example = x 											-- Device orientation
 
 
 
@@ -53,14 +55,33 @@ DEBUG.example = x 											-- Device orientation
 -- PUBLIC FUNCTIONS
 --------------------------------------------------------------------------------
 
--- DEBUG.displayDebug = function()
--- 	local debugGroup = display.newGroup()
+debug.displayDebug = function()
+	print("debug.displayDebug called")
 
--- 	-- Create box to hold the information
--- 	local debugRect = display.newRect( debugGroup, 0, 0, 50, 50)
--- 	debugRect:setFillColor(255, 255, 255)
--- 	debugRect:setStrokeColor(45, 180, 100)
--- end
+	-- Create display groups
+	local debugGroup = display.newGroup()
+		local debugMenuGroup = display.newGroup()
+
+	-- Organise our groups
+	debugGroup:insert(debugMenuGroup)
+
+
+	-- Create debug menu button
+	local debugMenuBtn = display.newRect(debugMenuGroup, 0, 0, 50, 50)
+	debugMenuBtn:setReferencePoint(display.TopRightReferencePoint)
+	debugMenuBtn.x = GD.screenRight
+	debugMenuBtn.y = GD.screenTop
+	debugMenuBtn:setFillColor(255, 255, 255)
+	debugMenuBtn:setStrokeColor(45, 180, 100)
+
+	-- Create debug menu box
+	local debugMenuBg = display.newRect(debugMenuGroup, 0, 0, 250, GD.screenHeight)
+	debugMenuBg:setReferencePoint(display.TopLeftReferencePoint)
+	debugMenuBg.x = GD.screenRight
+	debugMenuBg.y = GD.screenTop
+	debugMenuBg:setFillColor(200, 200, 200)
+	debugMenuBg:setStrokeColor(45, 180, 100)
+end
 
 
 
@@ -123,4 +144,4 @@ end
 --------------------------------------------------------------------------------
 -- EXPORT DATA AND FUNCTIONS
 -------------------------------------------------------------------------------- 
-return DEBUG
+return debug

@@ -18,13 +18,14 @@ MODULE NOTES:
 -- SETUP MODULE
 --------------------------------------------------------------------------------
 
+print("globals module loaded")
+
 -- LOAD MODULES
 ----------------------------------------
 
 
 -- CONSTRUCTOR
 ----------------------------------------
--- print("global data loaded")
 local GD = {}
 
 
@@ -54,7 +55,7 @@ GD.screenCenterX = display.contentWidth/2       			-- Horizontal Center
 GD.screenCenterY = display.contentHeight/2      			-- Vertical Center
 
 -- DEBUG VARIABLES
-GD.debugging = false					-- Turn on/off dubugging
+GD.debugging = true					-- Turn on/off dubugging
 GD.memtest = true 						-- Turn on/off memory test info
 
 
