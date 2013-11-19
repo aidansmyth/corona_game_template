@@ -44,8 +44,8 @@ local x = 1
 
 -- POSITIONING VARIABLES
 GD.orientation = system.orientation							-- Device orientation
-GD.screenWidth = display.contentWidth           			-- Screen width
-GD.screenHeight = display.contentHeight         			-- Screen height
+GD.screenWidth = display.pixelWidth           				-- Screen width
+GD.screenHeight = display.pixelHeigth         				-- Screen heigth
 GD.screenTop = 0                                			-- Screen Top
 GD.screenRight = display.contentWidth           			-- Screen Right
 GD.screenBottom = display.contentHeight         			-- Screen Bottom
@@ -55,7 +55,7 @@ GD.screenCenterY = display.contentHeight/2      			-- Vertical Center
 
 -- DEBUG VARIABLES
 GD.debugging = false					-- Turn on/off dubugging
-GD.memtest = true 						-- Turn on/off memory test info
+GD.memtest = false						-- Turn on/off memory test info
 
 
 --------------------------------------------------------------------------------
