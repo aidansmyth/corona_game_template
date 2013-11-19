@@ -32,6 +32,9 @@ local scene = storyboard.newScene()
 -- VARIABLES
 ----------------------------------------
 
+-- Memory management variables
+local timerStash = {}
+local transitionStash = {}
 
 
 -- local forward references should go here --
@@ -69,6 +72,9 @@ end
 function scene:exitScene( event )
 	local group = self.view
 
+	-- Call UTIL functions to stop all timers/transitions in the scene
+	UTIL.cancelAllTimers( timerStash )
+	UTIL.cancelAllTransitions( transitionStash )
 end
 
 -- Called AFTER scene has finished moving offscreen:

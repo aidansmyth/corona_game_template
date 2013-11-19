@@ -75,5 +75,33 @@ UTIL.dbprint = function(message)
 end
 
 
+-- Memory Management functions ---------
+-- Clear timers
+UTIL.cancelAllTimers = function( timerStash )
+    local k, v
+
+    for k,v in pairs(timerStash) do
+        timer.cancel( v )
+        v = nil; k = nil
+    end
+
+    timerStash = nil
+    timerStash = {}
+end
+
+-- clear transitions
+UTIL.cancelAllTransitions = function( transitionStash )
+    local k, v
+
+    for k,v in pairs(transitionStash) do
+        transition.cancel( v )
+        v = nil; k = nil
+    end
+
+    transitionStash = nil
+    transitionStash = {}
+end
+
+
 -- 
 return UTIL

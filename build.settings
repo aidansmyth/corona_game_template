@@ -15,15 +15,15 @@ NOTES:
 
 ------------------------------------------------------------------------------]]
 
--- Supported values for orientation:
--- portrait, portraitUpsideDown, landscapeLeft, landscapeRight
 
 settings = {
 	
 	orientation = {
-		default = "portrait",
-		content = { "portrait", "portraitUpsideDown"},
-		supported = { "portrait", "portraitUpsideDown"}
+		-- Supported values for orientation:
+		-- "portrait", "portraitUpsideDown", "landscapeLeft", "landscapeRight"
+		default = "landscapeLeft",
+		content = { "landscapeLeft", "portraitUpsideDown"},
+		supported = { "portrait", "portraitUpsideDown", "landscapeLeft", "landscapeRight"}
 	},
 	
 	iphone = {

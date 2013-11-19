@@ -32,10 +32,15 @@ local scene = storyboard.newScene()
 -- VARIABLES
 ----------------------------------------
 
+-- Memory management variables
+local timerStash = {}
+local transitionStash = {}
+
 
 
 -- LOCAL FUNCTIONS
 ----------------------------------------
+
 
 
 
@@ -63,12 +68,19 @@ end
 function scene:enterScene( event )
 	local group = self.view
 
+	-- Completely remove the previous scene.
+    -- Handy in this case where we want to keep everything simple.
+    storyboard.removeAll()
+
 end
 
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
 	local group = self.view
 
+	-- Call UTIL functions to stop all timers/transitions in the scene
+	UTIL.cancelAllTimers( timerStash )
+	UTIL.cancelAllTransitions( transitionStash )
 end
 
 -- Called AFTER scene has finished moving offscreen:
