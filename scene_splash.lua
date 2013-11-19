@@ -66,9 +66,30 @@ end
 function scene:enterScene( event )
 	local group = self.view
 
+	-----------------------------------------------------------------------------
+    --	INSERT code here (e.g. start timers, load audio, start listeners, etc.)
+    -----------------------------------------------------------------------------
+
 	-- Completely remove the previous scene.
     -- Handy in this case where we want to keep everything simple.
     storyboard.removeAll()
+
+	-- startTimer = function()
+	-- 	disableSceneOnChange()
+	-- 	local waitTime = 1
+
+	-- 	-- Check the time on each loop of the timer
+	-- 	checkTime = function()
+	-- 		waitTime = waitTime - 1
+	-- 		if waitTime <= 0 then
+	-- 			storyboard.gotoScene( "scene_menu", "fade", 400 )	-- Go to main menu
+	-- 		end
+	-- 	end
+
+	-- 	-- Start the timer
+	-- 	timerStash.exitTimer = timer.performWithDelay(1000, checkTime, 20)
+
+	-- end
 
 end
 
