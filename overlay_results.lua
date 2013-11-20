@@ -19,11 +19,15 @@ SCENE NOTES:
 -- SCENE SETUP
 --------------------------------------------------------------------------------
 
+-- Load libraries
+----------------------------------------
+local storyboard = require( "storyboard" ) 					-- Load storyboard library
+
 -- Load modules
 ----------------------------------------
 local GD = require("globals")								-- Load global data module
 local UTIL = require("modules.utilities")					-- Load utility module
-local storyboard = require( "storyboard" ) 					-- Load storyboard module
+
 
 -- Start scene
 local scene = storyboard.newScene()
