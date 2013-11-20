@@ -37,12 +37,28 @@ local timerStash = {}
 local transitionStash = {}
 
 
+-- local forward references should go here --
+
+
 -- LOCAL FUNCTIONS
 ----------------------------------------
 
+function startTimer()
+	disableSceneOnChange()
+	local waitTime = 1
 
+    -- Check the time on each loop of the timer
+    function checkTime()
+    	waitTime = waitTime - 1
+    	if waitTime <= 0 then
+    		storyboard.gotoScene( "scene_menu", "fade", 400 )	-- Go to main menu
+    	end
+	end
 
--- local forward references should go here --
+	-- Start the timer
+    timerStash.exitTimer = timer.performWithDelay(1000, checkTime, 20)
+
+end
 
 
 
@@ -74,22 +90,7 @@ function scene:enterScene( event )
     -- Handy in this case where we want to keep everything simple.
     storyboard.removeAll()
 
-	-- startTimer = function()
-	-- 	disableSceneOnChange()
-	-- 	local waitTime = 1
 
-	-- 	-- Check the time on each loop of the timer
-	-- 	checkTime = function()
-	-- 		waitTime = waitTime - 1
-	-- 		if waitTime <= 0 then
-	-- 			storyboard.gotoScene( "scene_menu", "fade", 400 )	-- Go to main menu
-	-- 		end
-	-- 	end
-
-	-- 	-- Start the timer
-	-- 	timerStash.exitTimer = timer.performWithDelay(1000, checkTime, 20)
-
-	-- end
 
 end
 
