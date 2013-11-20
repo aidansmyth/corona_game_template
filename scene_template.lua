@@ -52,19 +52,20 @@ local transitionStash = {}
 
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
-	local group = self.view
+	local sceneGroup = self.view
 
+	local sceneTitle = display.newText(sceneGroup, "scene_template", GD.screenCenterX, GD.screenCenterY, native.systemFont, 20)
 end
 
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
-	local group = self.view
+	local sceneGroup = self.view
 
 end
 
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
-	local group = self.view
+	local sceneGroup = self.view
 
 	-- Completely remove the previous scene.
     -- Handy in this case where we want to keep everything simple.
@@ -74,7 +75,7 @@ end
 
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
-	local group = self.view
+	local sceneGroup = self.view
 
 	-- Call UTIL functions to stop all timers/transitions in the scene
 	UTIL.cancelAllTimers( timerStash )
@@ -83,26 +84,26 @@ end
 
 -- Called AFTER scene has finished moving offscreen:
 function scene:didExitScene( event )
-	local group = self.view
+	local sceneGroup = self.view
 
 end
 
 -- Called prior to the removal of scene's "view" (display view)
 function scene:destroyScene( event )
-	local group = self.view
+	local sceneGroup = self.view
 
 end
 
 -- Called if/when overlay scene is displayed via storyboard.showOverlay()
 function scene:overlayBegan( event )
-	local group = self.view
+	local sceneGroup = self.view
 	local overlay_name = event.sceneName  -- name of the overlay scene
 
 end
 
 -- Called if/when overlay scene is hidden/removed via storyboard.hideOverlay()
 function scene:overlayEnded( event )
-	local group = self.view
+	local sceneGroup = self.view
 	local overlay_name = event.sceneName  -- name of the overlay scene
 
 end
