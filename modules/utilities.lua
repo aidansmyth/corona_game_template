@@ -61,26 +61,37 @@ local UTIL = {}
 -- PUBLIC FUNCTIONS
 --------------------------------------------------------------------------------
 
--- TABLE FUNCTIONS
+
+ -- TABLE FUNCTIONS
 ----------------------------------------
 
--- Print contents of a table
-function UTIL.tprint( t, indent )
-	--print("Printing contents of table")
+--[[
+Print contents of a table
+https://gist.github.com/hashmal/874792
+
+
+]]
+
+function UTIL.tprint (tbl, indent)
 	if not indent then indent = 0 end
-	for k, v in pairs(t) do
-		formatting = string.rep(" ", indent) .. k ..": "
+	for k, v in pairs(tbl) do
+		formatting = string.rep("  ", indent) .. k .. ": "
 		if type(v) == "table" then
 			print(formatting)
 			tprint(v, indent+1)
 		else
-			print(formatting .. tostring(v))
+			print(formatting .. v)
 		end
 	end
 end
 
--- Completely copy a table
-function UTIL.deepcopy( orig )
+
+--[[
+Completely copy a multi level table
+http://lua-users.org/wiki/CopyTable
+
+]]
+function UTIL.deepcopy(orig)
     local orig_type = type(orig)
     local copy
     if orig_type == 'table' then
@@ -95,7 +106,29 @@ function UTIL.deepcopy( orig )
     return copy
 end
 
+--[[
+-- Completely copy a single level table
+http://lua-users.org/wiki/CopyTable
+
+]]
+function UTIL.shallowcopy(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in pairs(orig) do
+            copy[orig_key] = orig_value
+        end
+    else -- number, string, boolean, etc
+        copy = orig
+    end
+    return copy
+end
+
+--[[
 -- Shuffle a table
+
+]]
 function UTIL.shuffle(t)
     local rand = math.random 
     assert(t, "table.shuffle() expected a table, got nil")
@@ -108,26 +141,22 @@ function UTIL.shuffle(t)
     end
 end
 
--- A function to check an item against the contents of an table 
-function UTIL.checkForDuplicate(item,table)
-	local target = item
-	local t = table
-	local len = #t
+--[[
+-- A function to check an item against the contents of an table
+
+]] 
+function UTIL.isInTable(table, item)
+	local len = #table
 	local isDuplicate = false
 	
 	for i=1, len do
-		if target == t[i] then
-			--print("It does")
+		if item == table[i] then
 			isDuplicate = true
 			break
 		end
 	end
 	
-	if isDuplicate then
-		return false
-	else
-		return true
-	end
+	return isDuplicate
 end
 
 
@@ -178,7 +207,7 @@ end
 ----------------------------------------
 
 -- Print debug messages to the console
-UTIL.dbprint = function(message)
+function UTIL.dbprint(message)
 	-- print("dbprint called")
 	local msg = message
 	if GD.debugging == true then
@@ -193,7 +222,7 @@ end
 ----------------------------------------
 
 -- Clear timers
-UTIL.cancelAllTimers = function( timerStash )
+function UTIL.cancelAllTimers( timerStash )
     local k, v
 
     for k,v in pairs(timerStash) do
@@ -206,7 +235,7 @@ UTIL.cancelAllTimers = function( timerStash )
 end
 
 -- clear transitions
-UTIL.cancelAllTransitions = function( transitionStash )
+function UTIL.cancelAllTransitions( transitionStash )
     local k, v
 
     for k,v in pairs(transitionStash) do
@@ -217,6 +246,8 @@ UTIL.cancelAllTransitions = function( transitionStash )
     transitionStash = nil
     transitionStash = {}
 end
+
+
 
 
 --------------------------------------------------------------------------------

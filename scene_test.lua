@@ -1,6 +1,6 @@
 --[[----------------------------------------------------------------------------
 
-SCENE NAME: scene_splash.lua
+SCENE NAME: scene_test.lua
 
 DATE: 
 
@@ -23,7 +23,6 @@ SCENE NOTES:
 ----------------------------------------
 local storyboard = require( "storyboard" ) 					-- Load storyboard library
 
-
 -- Load modules
 ----------------------------------------
 local GD = require("globals")								-- Load global data module
@@ -41,32 +40,37 @@ local scene = storyboard.newScene()
 local timerStash = {}
 local transitionStash = {}
 
--- Display groups
-local splashGroup = display.newGroup()
+-- test table
+local testTable = {1,2,3,4,5,6,7,8,9}
 
+local deepTestTable = {
+	{1,2,3},
+	{4,5,6},
+	{7,8,9}
+}
+
+local Array={"Forest","Beach","Home"} --places
+Array["Forest"] = {"Trees","Flowers"} --things you find there
+Array["Forest"]["Trees"] = "A tree is a perennial woody plant" --description
 
 
 -- local forward references should go here --
 
 
+
 -- LOCAL FUNCTIONS
 ----------------------------------------
-
-function startTimer()
-	-- disableSceneOnChange()
-	local waitTime = 1
-
-    -- Check the time on each loop of the timer
-    function checkTime()
-    	waitTime = waitTime - 1
-    	if waitTime <= 0 then
-    		storyboard.gotoScene( "scene_test", "fade", 400 )	-- Go to main menu
-    	end
-	end
-
-	-- Start the timer
-    timerStash.exitTimer = timer.performWithDelay(1000, checkTime, 20)
-
+function tprint (tbl, indent)
+  if not indent then indent = 0 end
+  for k, v in pairs(tbl) do
+    formatting = string.rep("  ", indent) .. k .. ": "
+    if type(v) == "table" then
+      print(formatting)
+      tprint(v, indent+1)
+    else
+      print(formatting .. v)
+    end
+  end
 end
 
 
@@ -82,7 +86,31 @@ function scene:createScene( event )
 	local background = display.newRect(sceneGroup, 0,0,display.contentWidth,display.contentHeight)
 	background:setFillColor(140, 140, 140)
 
-	local sceneTitle = display.newText(sceneGroup, "scene_splash", display.contentWidth/2, display.contentHeight/2, native.systemFont, 20)
+	local sceneTitle = display.newText(sceneGroup, "scene_test", 0, 0, native.systemFont, 20)
+
+	local sizeInfoGroup = display.newGroup()
+
+
+
+	sceneGroup:insert(sizeInfoGroup)
+
+	local sizeInfoBg = display.newRect(sizeInfoGroup, 0, 0, 350, 600)
+	sizeInfoBg:setFillColor(200, 200, 200)
+
+
+	local screenWidth = display.newText(sizeInfoGroup, "Screen Width: " .. display.pixelWidth, 10, 30, native.systemFont, 20)
+	local screenHeight = display.newText(sizeInfoGroup, "Screen height: " .. display.pixelHeight, 10, screenWidth.y + 20, native.systemFont, 20)
+
+	local contentWidth = display.newText(sizeInfoGroup, "Content Width: " .. display.contentWidth, 10, screenHeight.y + 20, native.systemFont, 20)
+	local contentHeight = display.newText(sizeInfoGroup, "Content height: " .. display.contentHeight, 10, contentWidth.y + 20, native.systemFont, 20)
+
+	local screenOriginX = display.newText(sizeInfoGroup, "screenOriginX: " .. display.screenOriginX, 10, contentHeight.y + 20, native.systemFont, 20)
+	local screenOriginY = display.newText(sizeInfoGroup, "screenOriginY: " .. display.screenOriginY, 10, screenOriginX.y + 20, native.systemFont, 20)
+
+
+	sizeInfoGroup:setReferencePoint(display.CenterReferencePoint)
+	sizeInfoGroup.x, sizeInfoGroup.y = display.contentWidth/2, display.contentHeight/2
+
 end
 
 -- Called BEFORE scene has moved onscreen:
@@ -95,15 +123,9 @@ end
 function scene:enterScene( event )
 	local sceneGroup = self.view
 
-	-----------------------------------------------------------------------------
-    --	INSERT code here (e.g. start timers, load audio, start listeners, etc.)
-    -----------------------------------------------------------------------------
-
 	-- Completely remove the previous scene.
     -- Handy in this case where we want to keep everything simple.
     storyboard.removeAll()
-
-    startTimer()
 
 end
 

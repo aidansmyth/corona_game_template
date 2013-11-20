@@ -44,14 +44,35 @@ local x = 1
 
 -- POSITIONING VARIABLES
 GD.orientation = system.orientation							-- Device orientation
-GD.screenWidth = display.pixelWidth           				-- Screen width
-GD.screenHeight = display.pixelHeigth         				-- Screen heigth
-GD.screenTop = 0                                			-- Screen Top
-GD.screenRight = display.contentWidth           			-- Screen Right
-GD.screenBottom = display.contentHeight         			-- Screen Bottom
-GD.screenLeft = 0                               			-- Screen Left
+
+-- GD.screenWidth = display.pixelWidth           			-- Screen width
+-- GD.screenHeight = display.pixelHeigth         			-- Screen heigth
+-- GD.screenTop = 0                                			-- Screen Top
+-- GD.screenRight = display.contentWidth           			-- Screen Right
+-- GD.screenBottom = display.contentHeight         			-- Screen Bottom
+-- GD.screenLeft = 0                               			-- Screen Left
+
 GD.screenCenterX = display.contentWidth/2       			-- Horizontal Center 
 GD.screenCenterY = display.contentHeight/2      			-- Vertical Center
+
+GD.screenWidth = 0
+GD.screenHeight = 0
+GD.screenLeft = 0
+GD.screenRight = 0
+GD.screenTop = 0
+GD.screenBottom = 0
+
+GD.cw = display.contentWidth
+GD.ch = display.contentHeight
+GD.cl = 0
+GD.cr = 0
+GD.ct = 0
+GD.cb = 0
+
+
+
+
+-- SHORTHAND POSITIONING VARIABLES
 
 -- DEBUG VARIABLES
 GD.debugging = false					-- Turn on/off dubugging
