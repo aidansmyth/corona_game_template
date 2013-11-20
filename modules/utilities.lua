@@ -22,6 +22,10 @@ Corona SDK version used: 2012.971
 -- SETUP MODULE
 --------------------------------------------------------------------------------
 
+-- LOAD LIBRARIES
+----------------------------------------
+local json = require ("json")
+
 -- LOAD MODULES
 ----------------------------------------
 local GD = require("globals")					-- Load Global data
@@ -61,10 +65,10 @@ local UTIL = {}
 ----------------------------------------
 
 -- Print contents of a table
-UTIL.tprint = function(tbl, indent)
+function UTIL.tprint( t, indent )
 	--print("Printing contents of table")
 	if not indent then indent = 0 end
-	for k, v in pairs(tbl) do
+	for k, v in pairs(t) do
 		formatting = string.rep(" ", indent) .. k ..": "
 		if type(v) == "table" then
 			print(formatting)
@@ -76,7 +80,7 @@ UTIL.tprint = function(tbl, indent)
 end
 
 -- Completely copy a table
-UTIL.deepcopy = function(orig)
+function UTIL.deepcopy( orig )
     local orig_type = type(orig)
     local copy
     if orig_type == 'table' then
@@ -89,6 +93,83 @@ UTIL.deepcopy = function(orig)
         copy = orig
     end
     return copy
+end
+
+-- Shuffle a table
+function UTIL.shuffle(t)
+    local rand = math.random 
+    assert(t, "table.shuffle() expected a table, got nil")
+    local len = #t
+    local j
+    
+    for i = len, 2, -1 do
+        j = rand(i)
+        t[i], t[j] = t[j], t[i]
+    end
+end
+
+-- A function to check an item against the contents of an table 
+function UTIL.checkForDuplicate(item,table)
+	local target = item
+	local t = table
+	local len = #t
+	local isDuplicate = false
+	
+	for i=1, len do
+		if target == t[i] then
+			--print("It does")
+			isDuplicate = true
+			break
+		end
+	end
+	
+	if isDuplicate then
+		return false
+	else
+		return true
+	end
+end
+
+
+
+-- FILE HANDLING
+----------------------------------------
+
+-- Function to save table to json file
+function UTIL.saveJSON( table, fileNane )
+	-- Create path to the file
+	local path = system.pathForFile( fileName..".json", system.DocumentsDirectory )
+	-- Open file path & create/write to file mode
+	local file = io.open( path, "w" )
+	assert( file, "Error: "..fileName..".json not found!" )
+	-- Encode preferences to JSON
+	local contents = json.encode( table )
+	-- Write the JSON string to file
+	file:write(contents)
+	-- Close file connection
+	io.close( file )
+end
+
+-- Function to load json file to table
+function UTIL.loadJSON( table, fileName )
+	-- Create path to the file
+	local path = system.pathForFile( fileName..".json", system.DocumentsDirectory )
+	-- Open file path & read mode, will be nil if it does not exist
+	local file = io.open( path, "r" )
+	
+	if file then
+		-- Read all contents of file into a string
+		local contents = file:read( "*a" )
+		-- Decode json string the table
+		table = json.decode(contents)
+		-- Close file connection
+		io.close( file )
+	else
+		-- if no file exists create it
+		saveJSON( table, fileName )
+		-- Load json file
+		loadJSON( table, fileName )
+	end
 end
 
 
