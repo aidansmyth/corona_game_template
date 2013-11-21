@@ -2,15 +2,18 @@ local aspectRatio = display.pixelHeight / display.pixelWidth
 
 application = {
 	content = {
-		-- width = aspectRatio > 1.5 and 800 or math.ceil( 1200 / aspectRatio ), 	-- 
-		-- height = aspectRatio < 1.5 and 1200 or math.ceil( 800 * aspectRatio ), 	-- 
-    width = 768,
-    height = 1024, 
+		width = aspectRatio > 1.5 and 800 or math.ceil( 1200 / aspectRatio ), 	-- Adaptive width
+		height = aspectRatio < 1.5 and 1200 or math.ceil( 800 * aspectRatio ), 	-- Adaptive height
+    	-- width = 768,   					-- ipad width
+    	-- height = 1024, 					-- ipad height
+    	xAlign = "center",
+    	yAlign = "center",
 		scale = "letterBox", 			-- letterbox, zoomEven, zoomStretch
 		fps = 30, 						-- 30, 60
 
 		imageSuffix = {
-			["@2x"] = 1.3, 				-- 	
+			["@2x"] = 1.3, 				-- 
+			["@4x"] = 3.0, 				-- 	
 		},
 	},
 
