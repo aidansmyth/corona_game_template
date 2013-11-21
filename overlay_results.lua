@@ -27,6 +27,7 @@ local storyboard = require( "storyboard" ) 					-- Load storyboard library
 ----------------------------------------
 local GD = require("globals")								-- Load global data module
 local UTIL = require("modules.utilities")					-- Load utility module
+local F = require("modules.fonts")							-- Load fonts module
 
 
 -- Start scene
@@ -58,7 +59,7 @@ local transitionStash = {}
 function scene:createScene( event )
 	local sceneGroup = self.view
 
-	local sceneTitle = display.newText(sceneGroup, "overlay_results", GD.screenCenterX, GD.screenCenterY, native.systemFont, 20)
+	local sceneTitle = display.newText(sceneGroup, "overlay_results", GD.l + 20, GD.t + 20, F.default, F.size[2])
 end
 
 -- Called BEFORE scene has moved onscreen:

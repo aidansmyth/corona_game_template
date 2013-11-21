@@ -27,6 +27,7 @@ local storyboard = require( "storyboard" ) 					-- Load storyboard library
 ----------------------------------------
 local GD = require("globals")								-- Load global data module
 local UTIL = require("modules.utilities")					-- Load utility module
+local F = require("modules.fonts")							-- Load fonts module
 
 
 -- Start scene
@@ -86,7 +87,7 @@ function scene:createScene( event )
 	local background = display.newRect(sceneGroup, 0,0,display.contentWidth,display.contentHeight)
 	background:setFillColor(140, 140, 140)
 
-	local sceneTitle = display.newText(sceneGroup, "scene_test", 0, 0, native.systemFont, 20)
+	local sceneTitle = display.newText(sceneGroup, "scene_test", GD.l + 20, GD.t + 20, F.default, F.size[2])
 
 	local sizeInfoGroup = display.newGroup()
 
@@ -98,15 +99,23 @@ function scene:createScene( event )
 	sizeInfoBg:setFillColor(200, 200, 200)
 
 
-	local screenWidth = display.newText(sizeInfoGroup, "Screen Width: " .. display.pixelWidth, 10, 30, native.systemFont, 20)
-	local screenHeight = display.newText(sizeInfoGroup, "Screen height: " .. display.pixelHeight, 10, screenWidth.y + 20, native.systemFont, 20)
+	local screenWidth = display.newText(sizeInfoGroup, "Screen Width: " .. display.pixelWidth, 10, 30, F.default, F.size[1])
+	screenWidth:setTextColor( 0, 0, 0 )
 
-	local contentWidth = display.newText(sizeInfoGroup, "Content Width: " .. display.contentWidth, 10, screenHeight.y + 20, native.systemFont, 20)
-	local contentHeight = display.newText(sizeInfoGroup, "Content height: " .. display.contentHeight, 10, contentWidth.y + 20, native.systemFont, 20)
+	local screenHeight = display.newText(sizeInfoGroup, "Screen height: " .. display.pixelHeight, 10, screenWidth.y + 20, F.default, F.size[1])
+	screenHeight:setTextColor( 0, 0, 0 )
 
-	local screenOriginX = display.newText(sizeInfoGroup, "screenOriginX: " .. display.screenOriginX, 10, contentHeight.y + 20, native.systemFont, 20)
-	local screenOriginY = display.newText(sizeInfoGroup, "screenOriginY: " .. display.screenOriginY, 10, screenOriginX.y + 20, native.systemFont, 20)
+	local contentWidth = display.newText(sizeInfoGroup, "Content Width: " .. display.contentWidth, 10, screenHeight.y + 20, F.default, F.size[1])
+	contentWidth:setTextColor( 0, 0, 0 )
 
+	local contentHeight = display.newText(sizeInfoGroup, "Content height: " .. display.contentHeight, 10, contentWidth.y + 20, F.default, F.size[1])
+	contentHeight:setTextColor( 0, 0, 0 )
+
+	local screenOriginX = display.newText(sizeInfoGroup, "screenOriginX: " .. display.screenOriginX, 10, contentHeight.y + 20, F.default, F.size[1])
+	screenOriginX:setTextColor( 0, 0, 0 )
+
+	local screenOriginY = display.newText(sizeInfoGroup, "screenOriginY: " .. display.screenOriginY, 10, screenOriginX.y + 20, F.default, F.size[1])
+	screenOriginY:setTextColor( 0, 0, 0 )
 
 	sizeInfoGroup:setReferencePoint(display.CenterReferencePoint)
 	sizeInfoGroup.x, sizeInfoGroup.y = display.contentWidth/2, display.contentHeight/2
