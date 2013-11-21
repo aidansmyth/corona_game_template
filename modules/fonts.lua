@@ -17,7 +17,7 @@
 	
 -------------------------------------------------------------------------]]
 
-local device = require("device") 												-- Get system information from device module
+local device = require("modules.device") 		-- Get system information from device module
 
 -- Create a table that will contain all of our font name we are setting up.
 local F = {}
@@ -26,10 +26,10 @@ local F = {}
 -------------------------------------------------------------------------------------------
 -- List of fonts to be used, with the font names for diferent OS's and devices
 
-F.GillInfantReg = ""															-- Add Gill Sans Infant Regular
-F.GillInfantBold = ""															-- Add Gill Sans Infant Bold
+F.default = native.systemFont			-- Add the systems default font in case other fonts will not load
 
-F.Fallback = native.systemFont													-- Add the systems default font in case other fonts will not load
+F.GillInfantReg = ""					-- Add Gill Sans Infant Regular
+F.GillInfantBold = ""					-- Add Gill Sans Infant Bold
 
 -- Helper script to get fonts installed on system
 -------------------------------------------------------------------------------------------
@@ -88,6 +88,14 @@ else 																			-- otherwise it is running on a device so...
 		F.GillInfantBold = F.Fallback
 	end
 end
+
+
+
+-- Font Sizes
+-------------------------------------------------------------------------------------------
+-- table of standard sizes
+F.size = { 25, 40, 60 }
+
 
 -- Return the table "F", providing access to it from where the module is "required"
 return F
