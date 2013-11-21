@@ -21,6 +21,7 @@ SCENE NOTES:
 -- LOAD MODULES
 ----------------------------------------
 local GD = require("globals")								-- Load global data module
+local F = require("modules.fonts")							-- Load fonts module
 
 -- CONSTRUCTOR
 ----------------------------------------
@@ -34,19 +35,32 @@ local DEBUG = {}
 
 -- LOCAL VARIABES
 ----------------------------------------
-local x = 1
+
+local menuWidth = 350
+local menuHeight = GD.h
+local menuItemX = 100
+local menuItemSpacing = 40
+local menuOpen = false
+
+local debugInfoGroup = display.newGroup()
 
 
 -- GLOBAL VARIABLES
 ----------------------------------------
-DEBUG.example = x 											-- Device orientation
+
 
 
 
 --------------------------------------------------------------------------------
 -- PRIVATE FUNCTIONS
 --------------------------------------------------------------------------------
-
+function openMenu( event )
+	if menuOpen then
+		debugInfoGroup.x = debugInfoGroup.x - menuWidth
+	else
+		debugInfoGroup.x = debugInfoGroup.x + menuWidth
+	end
+end
 
 
 --------------------------------------------------------------------------------
@@ -77,48 +91,49 @@ DEBUG.example = x 											-- Device orientation
 -- performance.alpha = 0.6; -- So it doesn't get in the way of the rest of the scene
 
 
---[[
+--[[ ]]
 DEBUG.displayDebug = function()
 
-	if GD.memtest == true then
-		local debugInfoBox = display.newGroup()
+	-- Create debug menu button
+	local debugMenuBtn = display.newRect( debugInfoGroup, 0, 0, 80, 80)
+	debugMenuBtn:addEventListener("tap", openMenu)
 
-		-- Create box to hold the information
-		local debugRect = display.newRect( debugInfoBox, 0, 0, 300, 50)
-		debugRect:setFillColor(255, 255, 255)
-		debugRect:setStrokeColor(45, 180, 100)
+	-- Create box to hold the information
+	local debugMenuBg = display.newRect( debugInfoGroup, debugMenuBtn.width, 0, menuWidth, menuHeight)
+	debugMenuBg:setFillColor(255, 255, 255)
+	debugMenuBg:setStrokeColor(45, 180, 100)
 
-		-- Create text to show the memory usage
-		local memUsageText = display.newText( debugInfoBox, "Hello, World", 0, 0, "Arial", 18 )
-		memUsageText:setTextColor(0, 0, 255)
+	-- Create text to show the memory usage
+	local memUsageText = display.newText( debugInfoGroup, "Hello, World", menuItemX, 0, "Arial", 18 )
+	memUsageText:setTextColor(0, 0, 255)
 
-		-- Create text to show the texture memory usage
-		local textureMemUsageText = display.newText( debugInfoBox, "Hello, World", 0, 25, "Arial", 18 )
-		textureMemUsageText:setTextColor(0, 0, 255)
+	-- Create text to show the texture memory usage
+	local textureMemUsageText = display.newText( debugInfoGroup, "Hello, World", menuItemX, 25, "Arial", 18 )
+	textureMemUsageText:setTextColor(0, 0, 255)
 
-		-- Reset debugRect width & height to fix text
-		debugRect.width = debugInfoBox.width + 10
-		debugRect.height = debugInfoBox.height + 10
-	end
+	-- -- Create monitor function
+	-- monitorMem = function()
+
+	-- 	collectgarbage()
+
+	-- 	-- 
+	-- 	local textMem = system.getInfo( "textureMemoryUsed" ) / 1000000
+	-- 	memUsageText.text = "App Memory: " .. collectgarbage("count")
+	-- 	memUsageText:setReferencePoint(display.TopLeftReferencePoint)
+	-- 	memUsageText.x = 10
+	-- 	-- 
+	-- 	textureMemUsageText.text = "Texture Memory: " .. textMem
+	-- 	textureMemUsageText:setReferencePoint(display.TopLeftReferencePoint)
+	-- 	textureMemUsageText.x = 10
+	-- end
+
+	-- Reposition manu off screen
+	debugInfoGroup:setReferencePoint(display.TopLeftReferencePoint)
+	debugInfoGroup.x, debugInfoGroup.y = GD.r - debugMenuBtn.width, GD.t
+
 end 	-- End DEBUG.displayInfo() function
 
 
--- Create monitor function
-DEBUG.monitorMem = function()
-
-   collectgarbage()
-
-   -- 
-    local textMem = system.getInfo( "textureMemoryUsed" ) / 1000000
-    memUsageText.text = "App Memory: " .. collectgarbage("count")
-    memUsageText:setReferencePoint(display.TopLeftReferencePoint)
-    memUsageText.x = 10
-    -- 
-    textureMemUsageText.text = "Texture Memory: " .. textMem
-    textureMemUsageText:setReferencePoint(display.TopLeftReferencePoint)
-    textureMemUsageText.x = 10
-end
-]]
 
 --------------------------------------------------------------------------------
 -- EXPORT DATA AND FUNCTIONS
