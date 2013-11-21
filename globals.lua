@@ -42,42 +42,36 @@ local x = 1
 -- GLOBAL VARIABLES
 ----------------------------------------
 
--- POSITIONING VARIABLES
-GD.orientation = system.orientation							-- Device orientation
-
--- GD.screenWidth = display.pixelWidth           			-- Screen width
--- GD.screenHeight = display.pixelHeigth         			-- Screen heigth
--- GD.screenTop = 0                                			-- Screen Top
--- GD.screenRight = display.contentWidth           			-- Screen Right
--- GD.screenBottom = display.contentHeight         			-- Screen Bottom
--- GD.screenLeft = 0                               			-- Screen Left
-
-GD.screenCenterX = display.contentWidth/2       			-- Horizontal Center 
-GD.screenCenterY = display.contentHeight/2      			-- Vertical Center
-
-GD.screenWidth = 0
-GD.screenHeight = 0
-GD.screenLeft = 0
-GD.screenRight = 0
-GD.screenTop = 0
-GD.screenBottom = 0
-
-GD.cw = display.contentWidth
-GD.ch = display.contentHeight
-GD.cl = 0
-GD.cr = 0
-GD.ct = 0
-GD.cb = 0
-
-
-
-
--- SHORTHAND POSITIONING VARIABLES
-
 -- DEBUG VARIABLES
-GD.debugging = false					-- Turn on/off dubugging
+GD.debugging = true					-- Turn on/off dubugging
 GD.memtest = false						-- Turn on/off memory test info
 
+
+-- POSITIONING VARIABLES
+GD.orientation = system.orientation		-- Device orientation
+
+GD.cenX = display.contentCenterX 		-- Horizontal Center 
+GD.cenY = display.contentCenterY 		-- Vertical Center
+
+GD.w = display.contentWidth 			-- content width
+GD.h = display.contentHeight 			-- content height
+GD.l = 0 								-- left
+GD.r = GD.w 				 			-- right
+GD.t = 0 								-- top
+GD.b = GD.h 							-- bottom
+
+GD.sw = display.pixelWidth 				-- screen width
+GD.sh = display.pixelHeight 			-- screen heigth
+
+
+-- COLORS
+GD.textColors = {
+	
+}
+
+GD.mainColors = {
+	
+}
 
 --------------------------------------------------------------------------------
 -- PRIVATE FUNCTIONS
